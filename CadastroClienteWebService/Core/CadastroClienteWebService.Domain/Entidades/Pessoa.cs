@@ -18,6 +18,6 @@ namespace CadastroClienteWebService.Domain.Entidades
         public string Sobrenome { get; protected set; }
         public string Cpf { get; protected set; }
         public DateTime Nascimento { get; protected set; }
-        public int Idade { get => new DateTime(DateTime.Now.Subtract(Nascimento).Ticks).Year; }
+        public int Idade { get => new DateTime(DateTime.Now.Subtract(Nascimento).Ticks).Year - 1; }
     }
 }

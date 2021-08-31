@@ -39,7 +39,7 @@ namespace CadastroClienteWebService.UnitTest.UseCase
         public void DadoDadosValidosAIdadeDeveSerCalculada()
         {
             var cliente = ConstruirCliente("Roberto", "Da Silva", "123.456.789-10");
-            var idade = new DateTime(DateTime.Now.Subtract(cliente.Nascimento).Ticks).Year;
+            var idade = new DateTime(DateTime.Now.Subtract(cliente.Nascimento).Ticks).Year - 1;
 
             _cadastroClienteRepository
                 .Setup(x => x.Inserir(It.IsAny<Cliente>()))

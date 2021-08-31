@@ -1,3 +1,4 @@
+using CadastroClienteWebService.Api.Mapping;
 using CadastroClienteWebService.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -17,6 +18,6 @@ namespace CadastroClienteWebService.Api
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-                .ConfigureServices(service => service.DependencyInjectionConfiguration());
+                .ConfigureServices(service => service.DependencyInjectionConfiguration(new MappingProfileApi()));
     }
 }
