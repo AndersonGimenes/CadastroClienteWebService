@@ -30,9 +30,9 @@ namespace CadastroClienteWebService.Api.Controllers
             {
                 var cliente = _mapper.Map<Cliente>(request);
 
-                _cadastroClienteUseCase.Inserir(cliente);
+                var clienteResponse = _mapper.Map<ClienteResponse>(_cadastroClienteUseCase.Inserir(cliente));
 
-                return Ok();
+                return Ok(clienteResponse);
             }
             catch (Exception ex)
             {

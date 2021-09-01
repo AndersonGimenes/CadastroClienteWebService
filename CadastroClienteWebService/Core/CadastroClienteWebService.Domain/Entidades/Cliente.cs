@@ -14,9 +14,19 @@ namespace CadastroClienteWebService.Domain.Entidades
 
         public Profissao Profissao { get; private set; }
 
-        public void IsValid()
+        public Cliente IsValid()
         {
             new ClienteValidation(this);
+            return this;
+        }
+        public void AdicionarMascaraCpf()
+        {
+            Cpf = Convert.ToUInt64(Cpf).ToString(@"000\.000\.000\-00");
+        }
+
+        public void RemoverMascaraCpf()
+        {
+            Cpf = Cpf.Replace(".", string.Empty).Replace("-", string.Empty);
         }
     }
 }

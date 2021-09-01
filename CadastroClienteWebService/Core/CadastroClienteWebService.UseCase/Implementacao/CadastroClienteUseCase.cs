@@ -26,12 +26,17 @@ namespace CadastroClienteWebService.UseCase.Implementacao
 
         public Cliente Inserir(Cliente cliente)
         {
-            cliente.IsValid();
+            cliente
+                .IsValid()
+                .RemoverMascaraCpf();
 
-            return _cadastroClienteRepository.Inserir(cliente);
+            var clienteResponse = _cadastroClienteRepository.Inserir(cliente);
+            clienteResponse.AdicionarMascaraCpf();
+
+            return clienteResponse;
         }
 
-        public Cliente ObterPrId(int id)
+        public Cliente ObterPorId(int id)
         {
             throw new System.NotImplementedException();
         }
