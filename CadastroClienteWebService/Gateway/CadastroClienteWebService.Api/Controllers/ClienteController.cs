@@ -5,8 +5,6 @@ using CadastroClienteWebService.UseCase.Interfaces.UseCase;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CadastroClienteWebService.Api.Controllers
 {
@@ -33,6 +31,70 @@ namespace CadastroClienteWebService.Api.Controllers
                 var clienteResponse = _mapper.Map<ClienteResponse>(_cadastroClienteUseCase.Inserir(cliente));
 
                 return Ok(clienteResponse);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Atualizar([FromBody] ClienteRequest request)
+        {
+            try
+            {
+                var cliente = _mapper.Map<Cliente>(request);
+
+                var clienteResponse = _mapper.Map<ClienteResponse>(_cadastroClienteUseCase.Atualizar(cliente));
+
+                return Ok(clienteResponse);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Deletar([FromBody] ClienteRequest request)
+        {
+            try
+            {
+                var cliente = _mapper.Map<Cliente>(request);
+
+                _cadastroClienteUseCase.Deletar(cliente);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("ObterPorId/{id:int}")]
+        public IActionResult ObterPorId(int id)
+        {
+            try
+            {
+                var clienteResponse = _mapper.Map<ClienteResponse>(_cadastroClienteUseCase.ObterPorId(id));
+
+                return Ok(clienteResponse);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult ObterTodos()
+        {
+            try
+            {
+                var clientesResponse = _mapper.Map<IEnumerable<ClienteResponse>>(_cadastroClienteUseCase.ObterTodos());
+
+                return Ok(clientesResponse);
             }
             catch (Exception ex)
             {

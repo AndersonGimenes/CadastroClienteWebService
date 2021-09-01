@@ -11,25 +11,23 @@ namespace CadastroClienteWebService.UnitTest.UseCase
 {
     public class CadastroClienteUseCaseTest
     {
-        private readonly Mock<ICadastroClienteRepository> _cadastroClienteRepository;
         private readonly CadastroClienteUseCase _cadastroClienteUseCase;
 
         public CadastroClienteUseCaseTest()
         {
-            _cadastroClienteRepository = new Mock<ICadastroClienteRepository>();
-            _cadastroClienteUseCase = new CadastroClienteUseCase(_cadastroClienteRepository.Object);
+            var cadastroClienteRepository = new Mock<ICadastroClienteRepository>();
+            _cadastroClienteUseCase = new CadastroClienteUseCase(cadastroClienteRepository.Object);
 
+            cadastroClienteRepository
+               .Setup(x => x.Inserir(It.IsAny<Cliente>()))
+               .Returns(ConstruirCliente("Roberto", "Da Silva", "12345678910", 1));
         }
 
         [Fact]
         public void DadoDadosValidosDeveSerPersistidoClienteComSucesso()
         {
             var cliente = ConstruirCliente("Roberto", "Da Silva", "123.456.789-10");
-
-            _cadastroClienteRepository
-                .Setup(x => x.Inserir(It.IsAny<Cliente>()))
-                .Returns(ConstruirCliente("Roberto", "Da Silva", "123.456.789-10", 1));
-
+           
             var clienteResponse = _cadastroClienteUseCase.Inserir(cliente);
 
             Assert.Equal(1, clienteResponse.Id);
@@ -40,11 +38,7 @@ namespace CadastroClienteWebService.UnitTest.UseCase
         {
             var cliente = ConstruirCliente("Roberto", "Da Silva", "123.456.789-10");
             var idade = new DateTime(DateTime.Now.Subtract(cliente.Nascimento).Ticks).Year - 1;
-
-            _cadastroClienteRepository
-                .Setup(x => x.Inserir(It.IsAny<Cliente>()))
-                .Returns(ConstruirCliente("Roberto", "Da Silva", "123.456.789-10", 1));
-
+          
             var clienteResponse = _cadastroClienteUseCase.Inserir(cliente);
 
             Assert.Equal(idade, clienteResponse.Idade);

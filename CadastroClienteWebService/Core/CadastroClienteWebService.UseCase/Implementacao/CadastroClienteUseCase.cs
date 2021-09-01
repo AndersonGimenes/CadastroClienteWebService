@@ -14,14 +14,21 @@ namespace CadastroClienteWebService.UseCase.Implementacao
             _cadastroClienteRepository = cadastroClienteRepository;
         }
 
-        public void Atualizar(Cliente cliente)
+        public Cliente Atualizar(Cliente cliente)
         {
-            throw new System.NotImplementedException();
+            cliente
+                .IsValid()
+                .RemoverMascaraCpf();
+
+            var clienteResponse = _cadastroClienteRepository.Atualizar(cliente);
+            clienteResponse.AdicionarMascaraCpf();
+
+            return clienteResponse;
         }
 
         public void Deletar(Cliente cliente)
         {
-            throw new System.NotImplementedException();
+            _cadastroClienteRepository.Deletar(cliente);
         }
 
         public Cliente Inserir(Cliente cliente)
@@ -36,14 +43,8 @@ namespace CadastroClienteWebService.UseCase.Implementacao
             return clienteResponse;
         }
 
-        public Cliente ObterPorId(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public Cliente ObterPorId(int id) => _cadastroClienteRepository.ObterPorId(id);
 
-        public IEnumerable<Cliente> ObterTodos()
-        {
-            throw new System.NotImplementedException();
-        }
+        public IEnumerable<Cliente> ObterTodos() => _cadastroClienteRepository.ObterTodos();
     }
 }
