@@ -56,13 +56,11 @@ namespace CadastroClienteWebService.Api.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Deletar([FromBody] ClienteRequest request)
+        public IActionResult Deletar([FromQuery] int id)
         {
             try
-            {
-                var cliente = _mapper.Map<Cliente>(request);
-
-                _cadastroClienteUseCase.Deletar(cliente);
+            { 
+                _cadastroClienteUseCase.Deletar(id);
 
                 return NoContent();
             }

@@ -7,7 +7,7 @@ namespace CadastroClienteWebService.UseCase.Interfaces.Repository
     {
         Cliente Inserir(Cliente cliente);
         Cliente Atualizar(Cliente cliente);
-        void Deletar(Cliente cliente);
+        void Deletar(int id);
         Cliente ObterPorId(int id);
         IEnumerable<Cliente> ObterTodos();
     }

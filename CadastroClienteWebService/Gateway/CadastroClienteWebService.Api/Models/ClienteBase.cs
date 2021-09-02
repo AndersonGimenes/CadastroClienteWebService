@@ -1,7 +1,4 @@
-﻿using CadastroClienteWebService.Domain.Enums;
-using System;
-
-namespace CadastroClienteWebService.Api.Models
+﻿namespace CadastroClienteWebService.Api.Models
 {
     public abstract class ClienteBase
     {
@@ -9,7 +6,5 @@ namespace CadastroClienteWebService.Api.Models
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
         public string Cpf { get; set; }
-        public DateTime Nascimento { get; set; }
-        public Profissao Profissao { get; set; }
     }
 }

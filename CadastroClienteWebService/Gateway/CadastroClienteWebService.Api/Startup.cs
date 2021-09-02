@@ -18,6 +18,13 @@ namespace CadastroClienteWebService.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -26,7 +33,9 @@ namespace CadastroClienteWebService.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-                       
+
+            app.UseCors("MyPolicy");
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

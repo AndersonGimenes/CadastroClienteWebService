@@ -31,9 +31,9 @@ namespace CadastroClienteWebService.Repository.Repositories
             return _mapper.Map<Cliente>(clienteModel);
         }
 
-        public void Deletar(Cliente cliente)
+        public void Deletar(int id)
         {
-            var clienteModel = _mapper.Map<ClienteModel>(cliente);
+            var clienteModel = _context.Clientes.FirstOrDefault(x => x.Id == id);
 
             _context.Clientes.Remove(clienteModel);
 

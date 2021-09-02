@@ -9,6 +9,6 @@ namespace CadastroClienteWebService.UseCase.Interfaces.UseCase
         IEnumerable<Cliente> ObterTodos();
         Cliente Inserir(Cliente cliente);
         Cliente Atualizar(Cliente cliente);
-        void Deletar(Cliente cliente);
+        void Deletar(int id);
     }
 }

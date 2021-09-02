@@ -26,9 +26,9 @@ namespace CadastroClienteWebService.UseCase.Implementacao
             return clienteResponse;
         }
 
-        public void Deletar(Cliente cliente)
+        public void Deletar(int id)
         {
-            _cadastroClienteRepository.Deletar(cliente);
+            _cadastroClienteRepository.Deletar(id);
         }
 
         public Cliente Inserir(Cliente cliente)
